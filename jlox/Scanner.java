@@ -83,6 +83,11 @@ class Scanner {
       case '/':
         if (peek() == '/') {
           // Second consecutive slash, so it's a comment.
+          // TODO: support multi-line comments with the /* syntax */
+          // Challenge question, why might you want a scanner that doesn't
+          // ignore comments? A linter or other static analysis tool like
+          // Rubocop can use them, eg preferring FIXME to TODO or enforcing
+          // that certain comments should have a colon postfixed.
           while (!isAtEnd() && peek() != '\n') advance();
         } else {
           addToken(SLASH);
@@ -93,6 +98,10 @@ class Scanner {
       case '\r':
       case '\t':
         // Ignore whitespace.
+        // Challenge question, in what cases is whitespace relevant and should not be ignored?
+        // Obvious case is an indentation-sensitive language like Python where the number of tabs
+        // matters. Another case is a language like Ruby where you can invoke functions without parens.
+        // So puts some_var is equivalent to puts(some_var) and is NOT the identifier putssome_var.
         break;
 
       case '\n':
