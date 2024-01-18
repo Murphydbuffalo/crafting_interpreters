@@ -32,10 +32,10 @@ public class Lox {
     BufferedReader reader = new BufferedReader(input);
 
     while (true) {
-      System.out.println(">");
+      System.out.print("> ");
 
       String line = reader.readLine();
-      if (line == null) break; // TODO: make the REPL exit on CMD+C instead
+      if (line == null) break;
 
       run(line); // TODO: support processing multiple lines
       hadError = false;
