@@ -193,12 +193,18 @@ class Scanner {
     return source.charAt(current);
   }
 
+  private String currentLexeme() {
+    if (current >= source.length()) return "";
+
+    return source.substring(start, current + 1);
+  }
+
   private void addToken(TokenType type) {
-    tokens.add(new Token(type, "", null, line));
+    tokens.add(new Token(type, currentLexeme(), null, line));
   }
 
   private void addToken(TokenType type, Object literal) {
-    tokens.add(new Token(type, "", literal, line));
+    tokens.add(new Token(type, currentLexeme(), literal, line));
   }
 
   private char peek() {
